@@ -113,24 +113,32 @@
                         // width
                         pw = $("<p></p>").text("width: " + w);
 
-                        total = w - 4;
-
-                        if (total < 4) {
+                        if (w == 4) {
                             big_w = 0;
-                            rest = total;
+                            medium_w = 0;
+                            small_w = 0;
                         } else {
-                            big_w = (total - (total % 4)) / 4;
-                            rest = total % 4;
+                            total = w - 4;
+
+                            if (total < 4) {
+                                big_w = 0;
+                                rest = total;
+                            } else {
+                                big_w = (total - (total % 4)) / 4;
+                                rest = total % 4;
+                            }
+
+                            if (rest < 2) {
+                                medium_w = 0;
+                                small_w = rest;
+                            } else {
+                                medium_w = (rest - (rest % 2)) / 2;
+                                rest = rest % 2;
+                                small_w = rest;
+                            }
                         }
 
-                        if (rest < 2) {
-                            medium_w = 0;
-                            small_w = rest;
-                        } else {
-                            medium_w = (rest - (rest % 2)) / 2;
-                            rest = rest % 2;
-                            small_w = rest;
-                        }
+
 
                         pw.append(" Store: " + big_w);
                         pw.append(" Mellem: " + medium_w);
