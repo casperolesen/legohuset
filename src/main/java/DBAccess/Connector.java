@@ -11,8 +11,10 @@ import java.sql.SQLException;
 public class Connector {
     
     private static final String URL = "jdbc:mysql://localhost:3306/legohuset";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "Repsac270390";
+    //private static final String USERNAME = "root";
+    //private static final String PASSWORD = "Repsac270390";
+    private static final String USERNAME = "admin";
+    private static final String PASSWORD = "test";
 
     private static Connection singleton;
 

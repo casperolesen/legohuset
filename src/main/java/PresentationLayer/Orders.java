@@ -21,14 +21,16 @@ public class Orders extends Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         
+        List<Order> orders;
+        
         if (user.getRole().equals("employee")) {
-            List<Order> orders = LogicFacade.getOrders();
-            request.setAttribute("orders", orders);
-            
-            return "orderspage";
+            orders = LogicFacade.getOrders();
         } else {
-            throw new LegohusetException("Du er ikke ansat");
+            orders = LogicFacade.getOrders();
         }
+        
+        request.setAttribute("orders", orders);
+        return "orderspage";
         
     }
     

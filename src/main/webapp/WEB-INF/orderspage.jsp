@@ -15,14 +15,16 @@
         <jsp:include page="header.jsp"></jsp:include>
     </head>
     <body>
+        <div class="container">
         <jsp:include page="menu.jsp"></jsp:include>
         <h1>Ordrer</h1>
         <p>Liste med ordrer</p>
         
-        <ul>
+        <div class="list-group">
             <% for (Order o : orders) { %>
-            <li> <%= o.toString() %></li>
+            <a href="#" class="list-group-item list-group-item-action"> <%= o.toString() %></a>
             <% } %>
-        </ul>
+        </div>
+        </div>
     </body>
 </html>
