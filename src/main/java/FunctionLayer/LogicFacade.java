@@ -39,6 +39,8 @@ public class LogicFacade {
         OrderMapper.shipOrder(orderId);
     }
 
+    // bliver pt ikke brugt til noget. styklisterne udregnes i app.js og customerpage.jsp
+    // Regnestykket er dog det samme.
     public static House buildHouse(Odetail odetail) {
         int big = 0, medium = 0, small = 0;
         int len, wid;
@@ -59,6 +61,9 @@ public class LogicFacade {
             small += ((len % 4) + (wid % 4)) * 2;
 
         }
+        
+        if (odetail.hasDoor()) big -= 3;
+        if (odetail.hasWindow()) big -=2;
         
         return new House(big, medium, small);
     }
