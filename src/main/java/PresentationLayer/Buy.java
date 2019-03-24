@@ -18,35 +18,46 @@ public class Buy extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LegohusetBuyException, LegohusetException {
-        
+
         Odetail odetail;
-        
-        String length = request.getParameter("length");
-        String width = request.getParameter("width");
-        String height = request.getParameter("height");
+        int length, width, height;
         
         boolean door = Boolean.parseBoolean(request.getParameter("door"));
         boolean window = Boolean.parseBoolean(request.getParameter("window"));
         
-        if (length == null || length.isEmpty()) throw new LegohusetBuyException("Udfyld længde");
-        if (width == null || width.isEmpty()) throw new LegohusetBuyException("Udfyld bredde");
-        if (height == null || height.isEmpty()) throw new LegohusetBuyException("Udfyld højde");
-        
-        if ((Integer.parseInt(length) < 12 ||Integer.parseInt(width) < 12 || Integer.parseInt(height) < 8) && (door || window)) throw new LegohusetBuyException("Du skal bruge et større hus..");
+        if (request.getParameter("length") == null || request.getParameter("length").isEmpty()) {
+            throw new LegohusetBuyException("Udfyld længde");
+        }
+        if (request.getParameter("width") == null || request.getParameter("width").isEmpty()) {
+            throw new LegohusetBuyException("Udfyld bredde");
+        }
+        if (request.getParameter("height") == null || request.getParameter("height").isEmpty()) {
+            throw new LegohusetBuyException("Udfyld højde");
+        }
         
         try {
-            odetail = new Odetail(Integer.parseInt(length), Integer.parseInt(width), Integer.parseInt(height), door, window);
+            length = Integer.parseInt(request.getParameter("length"));
+            width = Integer.parseInt(request.getParameter("width"));
+            height = Integer.parseInt(request.getParameter("height"));
+
+            
         } catch (NumberFormatException ex) {
             throw new LegohusetBuyException("Virker kun med tal..");
         }
-        
+
+        if ((length < 12 || width < 12 || height < 8) && (door || window)) {
+            throw new LegohusetBuyException("Du skal bruge et større hus..");
+        }
+
+        odetail = new Odetail(length, width, height, door, window);
+
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        
+
         Order order = LogicFacade.addOrder(user.getId(), odetail);
         request.setAttribute("order", order);
-        
+
         return "confirmationpage";
     }
-       
+
 }
