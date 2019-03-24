@@ -21,7 +21,9 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
     `user_id` INT(11) NOT NULL,
-    `created` DATETIME DEFAULT now(),
+    `created` DATETIME NOT NULL DEFAULT now(),
+    `sent` BOOLEAN NOT NULL DEFAULT false,
+    `sent_date` DATETIME DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -32,5 +34,7 @@ CREATE TABLE `odetails` (
     `length` INT(11) NOT NULL,
     `width` INT(11) NOT NULL,
     `height` INT(11) NOT NULL,
+    `door` boolean NOT NULL DEFAULT false,
+    `window` boolean NOT NULL DEFAULT false,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

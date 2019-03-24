@@ -3,7 +3,9 @@
     Created on : 17-Mar-2019, 13:30:21
     Author     : Casper
 --%>
-
+<jsp:include page="checkLogin.jsp"></jsp:include>
+    
+<%@page import="FunctionLayer.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -16,7 +18,7 @@
         <div class="container">
         <jsp:include page="menu.jsp"></jsp:include>
         
-        <h1>Hello <%=request.getParameter( "email")%></h1>
+        <h1>Hello <%= ((User) session.getAttribute("user")).getEmail() %> </h1>
         You are now logged in as a EMPLOYEE of our wonderful site.
         </div>
     </body>

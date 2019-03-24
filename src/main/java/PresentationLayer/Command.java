@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import FunctionLayer.LegohusetBuyException;
 import FunctionLayer.LegohusetException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +16,13 @@ abstract class Command {
     
     private static void initCommands() {
         commands = new HashMap();
+        commands.put( "home", new Home());
         commands.put( "login", new Login() );
+        commands.put( "logout", new Logout() );
         commands.put( "register", new Register() );
         commands.put( "buy", new Buy() );
         commands.put( "orders", new Orders() );
+        commands.put( "orderShip", new OrderShip() );
     }
     
     static Command from ( HttpServletRequest request ) {
@@ -30,6 +34,6 @@ abstract class Command {
     }
     
     abstract String execute( HttpServletRequest request, HttpServletResponse response ) 
-            throws LegohusetException;
+            throws LegohusetException, LegohusetBuyException;
     
 }

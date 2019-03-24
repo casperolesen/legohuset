@@ -23,10 +23,15 @@ public class Orders extends Command {
         
         List<Order> orders;
         
+        if (request.getParameter("orderToShip") != null) {
+            String orderID = request.getParameter("orderToShip");
+            LogicFacade.shipOrder(Integer.parseInt(orderID));
+        }
+        
         if (user.getRole().equals("employee")) {
             orders = LogicFacade.getOrders();
         } else {
-            orders = LogicFacade.getOrders();
+            orders = LogicFacade.getOrders( user.getId() );
         }
         
         request.setAttribute("orders", orders);

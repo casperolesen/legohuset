@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import FunctionLayer.LegohusetBuyException;
 import FunctionLayer.LegohusetException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -37,6 +38,9 @@ public class FrontController extends HttpServlet {
         } catch (LegohusetException ex) {
             request.setAttribute( "error", ex.getMessage() );
             request.getRequestDispatcher( "index.jsp" ).forward( request, response );
+        } catch (LegohusetBuyException ex) {
+            request.setAttribute( "error" , ex.getMessage() );
+            request.getRequestDispatcher( "/WEB-INF/customerpage.jsp" ).forward( request, response );
         }
     }
 
