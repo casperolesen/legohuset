@@ -26,6 +26,8 @@ function validateLegoInput() {
 
 function previewLegoHouseTable(length, width, height) {
     var len = length, wid = width-4, hei = height;
+    var door = $("#doorInput").is(":checked");
+    var window = $("#windowInput").is(":checked");
 
     var tbody = $("#tbody-demo");
     tbody.empty();
@@ -39,6 +41,7 @@ function previewLegoHouseTable(length, width, height) {
 
     var small_len = len - ((big_len * 4) + (medium_len * 2));
     var small_wid = wid - ((big_wid * 4) + (medium_wid * 2));
+    
 
     // 2x4
     var td_type = $("<td></td").text("2x4");
@@ -47,7 +50,15 @@ function previewLegoHouseTable(length, width, height) {
     var td_s3 = $("<td></td").text(big_len);
     var td_s4 = $("<td></td").text(big_wid);
     var td_total = $("<td></td").text((big_len * 2) + (big_wid * 2));
-    var td_totalTimesHeight = $("<td></td").text(((big_len * 2) + (big_wid * 2)) * hei);
+    var sum = ((big_len * 2) + (big_wid * 2)) * hei;
+    if (door) {
+        sum -= 3;
+    }
+    if (window) {
+        sum -= 2;
+    }
+    var td_totalTimesHeight = $("<td></td").text(sum);
+    
     row.append(td_type, td_s1, td_s2, td_s3, td_s4, td_total, td_totalTimesHeight);
     tbody.append(row);
 

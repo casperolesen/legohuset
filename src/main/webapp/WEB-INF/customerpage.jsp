@@ -128,6 +128,9 @@
                     var len = $("#lengthInput").val();
                     var wid = $("#widthInput").val() - 4;
                     var h = $("#heightInput").val();
+                    var door = $("#doorInput").is(":checked");
+                    var window = $("#windowInput").is(":checked");
+                    
                     var big_len = 0, medium_len = 0, small_len = 0;
                     var big_wid = 0, medium_wid = 0, small_wid = 0;
 
